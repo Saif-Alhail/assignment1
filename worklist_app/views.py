@@ -4,17 +4,17 @@ from django.http import HttpResponseRedirect
 from .models import List
 from .forms import ListForm
 
-
-def home(request):
+def home(request, sorting='date'):
     if request.method == "POST":
         form = ListForm(request.POST or None)
         if form.is_valid():
             form.save()
             messages.success(request, ('The item has been added to list successfully!'))
-            all_items = List.objects.all
+            all_items = List.objects.all().order_by(sorting)
+            print (all_items)
             return render(request, 'home.html', {'all_items': all_items})    
     else:
-        all_items = List.objects.all
+        all_items = List.objects.all().order_by(sorting)
         return render(request, 'home.html', {'all_items': all_items})
 
 def about(request):
@@ -44,13 +44,18 @@ def add(request):
         if text == "":
             messages.error(request, ('You need to write something'))
             return redirect('home') 
-        print ("TEXT!!",text)
-        item = List.objects.create()
-        form = ListForm(request.POST or None, instance=item)
+        print (request.POST)
+        # item = List.objects.create(date=request.POST["datef"][0])
+        form = ListForm(request.POST or None)
         if form.is_valid():
             form.save()
+            # obj = form.save(commit=False)
+            # obj.date = form.cleaned_data.get("date")
+            # obj.save()
             messages.success(request, ('The item has been added successfully!'))
-            return redirect('home')   
+        else:
+            messages.error(request, ('Please fill in all fields'))
+        return redirect('home')   
 
 def edit(request, item_id):
     if request.method == "POST":
@@ -63,3 +68,15 @@ def edit(request, item_id):
     else:
         item = List.objects.get(pk=item_id)
         return render(request, 'edit.html', {'item': item})
+
+def sort_date(request):
+    return home(request, 'date')
+
+def sort_ascending(request):
+    return home(request, 'item')
+
+def sort_descending(request):
+    return home(request, '-item')
+
+def sort_pending(request):
+    return home(request, '-completed')

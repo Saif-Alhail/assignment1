@@ -17,12 +17,23 @@
             {% endfor %}
         {% endif %}
         <div class="container">
-            <!-- <ul class="navbar-nav mr-auto"> -->
-            <!-- </ul> -->
             <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'add' %}">
             {% csrf_token %}
-              <input class="form-control mr-sm-2" type="search" placeholder="To-Do Item" aria-label="Search" name="item">
+              <input class="form-control mr-sm-2" type="search" placeholder="Task" aria-label="Search" name="item">
+              <input name="date" value="{{feedback.dateSubmitted|date:'d/m/Y'}}" type="date">
+
               <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Add To List</button>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Sorting Method
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="{% url 'sort_date' %}">Date</a>
+                  <a class="dropdown-item" href="{% url 'sort_ascending' %}">Ascending</a>
+                  <a class="dropdown-item" href="{% url 'sort_descending'%}">Descending</a>
+                  <a class="dropdown-item" href="{% url 'sort_pending'%}">Pending</a>
+                </div>
+              </div>
             </form>
         </div><br>
         <br>
@@ -31,8 +42,9 @@
             <table class="table table-sm table-bordered">
                 <thead>
                     <tr>
-                    <th class="text-center" scope="col">Item</th>
-                    <th class="text-center" scope="col">Action</th>
+                    <th class="text-center" scope="col">Task</th>
+                    <th class="text-center" scope="col">Date</th>
+                    <th class="text-center" scope="col">Pending</th>
                     <th class="text-center" scope="col">Edit</th>
                     <th class="text-center" scope="col">Delete</th>
                     </tr>
@@ -42,14 +54,16 @@
                     {% if thing.completed %}
                         <tr class="table-secondary">
                             <td class="striker text-center">{{ thing.item }}</td>
-                            <td class="text-center"><a class="btn btn-primary" href="{% url 'uncross' thing.id %}">Uncross</a></td>
+                            <td class="striker text-center">{{ thing.date }}</td>
+                            <td class="text-center"><a class="btn btn-primary" href="{% url 'delete' thing.id %}">Completed</a></td>
                             <td class="text-center"><a class="btn btn-warning" href="{% url 'edit' thing.id %}">Edit</a></td>
                             <td class="text-center"><a class="btn btn-danger" href="{% url 'delete' thing.id %}">Delete</a></td>
                         </tr>
                     {% else %}
                     <tr>
                             <td class="text-center">{{ thing.item }}</td>
-                            <td class="text-center"><a class="btn btn-primary" href="{% url 'cross_off' thing.id %}">Cross off</a></td>
+                            <td class="text-center">{{ thing.date }}</td>
+                            <td class="text-center"><a class="btn btn-primary" href="{% url 'cross_off' thing.id %}">Pending Task</a></td>
                             <td class="text-center"><a class="btn btn-warning" href="{% url 'edit' thing.id %}">Edit</a></td>
                             <td class="text-center"><a class="btn btn-danger" href="{% url 'delete' thing.id %}">Delete</a></td>
                         </tr>
