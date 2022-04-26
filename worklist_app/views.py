@@ -52,7 +52,7 @@ def add(request):
             # obj = form.save(commit=False)
             # obj.date = form.cleaned_data.get("date")
             # obj.save()
-            messages.success(request, ('The item has been added successfully!'))
+            messages.success(request, ('The Task has been added successfully!'))
         else:
             messages.error(request, ('Please fill in all fields'))
         return redirect('home')   

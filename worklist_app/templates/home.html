@@ -20,9 +20,9 @@
             <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'add' %}">
             {% csrf_token %}
               <input class="form-control mr-sm-2" type="search" placeholder="Task" aria-label="Search" name="item">
-              <input class = "mx-2" name="date" value="{{feedback.dateSubmitted|date:'d/m/Y'}}" type="date">
+              <input class = "mx-3" name="date" value="{{feedback.dateSubmitted|date:'d/m/Y'}}" type="date">
 
-              <button class="btn btn-success my-2 my-sm-0" type="submit">Add To List</button>
+              <button class="btn btn-success my-2 my-sm-0" type="submit">Add</button>
               
             </form>
         </div><br>
@@ -43,7 +43,7 @@
                 <thead>
                     <tr>
                     <th class="text-center" scope="col">Task</th>
-                    <th class="text-center" scope="col">Date</th>
+                    <th class="text-center" scope="col">Date Due</th>
                     <th class="text-center" scope="col">Pending Status</th>
                     <th class="text-center" scope="col">Edit</th>
                     <th class="text-center" scope="col">Delete</th>
