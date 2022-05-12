@@ -11,4 +11,3 @@ class ListForm(forms.ModelForm):
         model = List
         fields = ["item", "completed", "date"]
         widgets = {"date": DateInput()}
-        # date = {'my_date_field' : DateInput()}

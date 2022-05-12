@@ -11,6 +11,9 @@ git clone https://github.com/Saif-Alhail/assignment1.git
 # Change to the main directory of assignment1
 cd/assignment1
 
+# Access the virtual environment (after creating one)
+python -m venv ./{virutal environment name} 
+
 # Install requirements by running the following command;
 """
 pip install -r requirements.txt
@@ -21,6 +24,10 @@ pip install -r requirements.txt
 •	Django == 3.2.7
 •	Pytz == 2021.1
 •	Sqlparse == 0.4.2
+
+# Make Migrations for Django
+python manage.py makemigrations
+python manage.py migrate
 
 # Starting the application
 cd/assignment
