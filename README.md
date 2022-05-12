@@ -2,6 +2,7 @@
 
 # Work List Application 
 This is a Python, Django based worklist application. The application is intended to be used as a Work List /  To-Do tasks that can be updated and changed frequently to suit the user. The user can add tasks by entering the name and the date, which are required fields, and then clicking add. This will be saved onto the database sqlite3. The database base is then constantly used, and the homepage is refreshed accordingly to display the new database containing the tasks. There is a functionality to tag a task as pending, which indicates that the task is overdue; afterwards, clicking completed will remove the task. There is an edit function to change the name of the task. There is also a delete functionality for the task to be removed. There are sorting methods that the user can use; sorting by Date, Ascending alphabetically based on the task, descending alphabetically based on the task and by the pending status of the task.
+This application runs as a website, so the server has to be run first, then accessed through the URL: http://127.0.0.1:8000/
 
 # Start by cloning the project:
 """
@@ -27,20 +28,22 @@ pip install -r requirements.txt
 •	Sqlparse == 0.4.2
 (Breuss, 2021)
 (Aziz, 2021)
+
 # Make Migrations for Django
 python manage.py makemigrations
 python manage.py migrate
 (Django, 2005)
 (Aziz, 2021)
 (Barbacena, 2015)
+
 # Starting the application
-cd/assignment
+cd/assignment1
 start the application by running the following command;
 """
 python manage.py runserver
 """
 (Django, 2005)
-# This application runs as a website, so the server has to be run first, then accessed through the URL: http://127.0.0.1:8000/
+
 # To start the application next:
 Access URL through: http://127.0.0.1:8000/
 (Breuss, 2021)
